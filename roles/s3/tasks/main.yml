@@ -2,7 +2,7 @@
 - name: Zip Lambda Code 
   archive:
     path: "code/{{ item }}.py"
-    dest: "roles/s3/files/{{ item }}.zip"
+    dest: "{{ item }}.zip"
     format: zip
   with_items:
   - get_data
@@ -18,7 +18,7 @@
   amazon.aws.aws_s3:
     bucket: "{{ code_bucket_name }}"
     object: "{{ item }}.zip"
-    src: "roles/s3/files/{{ item }}.zip"
+    src: "{{ item }}.zip"
     mode: put
   with_items:
   - get_data
