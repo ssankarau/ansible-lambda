@@ -1,12 +1,12 @@
 - name: Convert Jinja2 Template of Swaager
   template:
     src: swagger.yml.j2
-    dest: roles/apigw/files/swagger.yml
+    dest: swagger.yml
     
 - name: Setup AWS API Gateway setup on AWS and deploy API definition
   community.aws.aws_api_gateway:
     region: "{{ region }}"
-    swagger_file: roles/apigw/files/swagger.yml
+    swagger_file: swagger.yml
     stage: dev
     cache_enabled: true
     cache_size: '1.6'
