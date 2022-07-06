@@ -1,0 +1,10 @@
+- name: Setup AWS API Gateway setup on AWS and deploy API definition
+  community.aws.aws_api_gateway:
+    swagger_file: roles/apigw/files/swagger.yml
+    stage: dev
+    cache_enabled: true
+    cache_size: '1.6'
+    tracing_enabled: true
+    endpoint_type: EDGE
+    state: present
+  register: api_gateway_resource

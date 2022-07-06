@@ -1,0 +1,12 @@
+- name: Lambda API GW Invocation
+  community.aws.lambda_policy:
+    state: present
+    function_name: HelloWorld
+    # alias: dev
+    statement_id: lambda-api-invocation-1
+    action: lambda:InvokeFunction
+    principal: apigateway.amazonaws.com
+    # source_arn: "arn:aws:execute-api:us-east-1:281735606975:{{ api_gateway_resource.api_id }}/*/*/HelloWorld"
+    source_arn: "arn:aws:execute-api:us-east-1:281735606975:{{ api_gateway_resource.api_id }}/*/GET/"
+  register: lambda_policy_action
+

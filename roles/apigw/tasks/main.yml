@@ -1,0 +1,6 @@
+---
+- name: Create Web ALB Target Groups
+  import_tasks: apigw.yml
+  
+- name: creating lambda resource policy
+  import_tasks: lambda-policy.yml

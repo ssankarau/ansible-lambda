@@ -1,0 +1,5 @@
+---
+code_zip: "python-sample.zip"
+handler: "index.lambda_handler"
+lambda_role_arn: "arn:aws:iam::281735606975:role/service-role/python-sample-template-role-x79qi0ie"
+rds_endpoint: "some_rds_end_point"
