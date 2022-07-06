@@ -1,0 +1,7 @@
+- name: Get the current caller identity information
+  amazon.aws.aws_caller_info:
+  register: caller_info
+- name: Set Fact the Account
+  set_fact:
+    account_number: "{{ caller_info.account }}"
+    

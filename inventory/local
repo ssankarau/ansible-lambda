@@ -2,6 +2,6 @@
 127.0.0.1 ansible_connection=local
 
 [all:vars]
-code_bucket_name=zymr-s3-bucket-serverless-code
+code_bucket_name=zymr-s3-bucket-serverless-code-{{region}}
 package_name=python-sample.zip
 demo_table_name= "demotable"

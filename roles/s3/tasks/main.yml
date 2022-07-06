@@ -1,18 +1,26 @@
 ---
+- name: Zip Lambda Code 
+  archive:
+    path: "code/{{ item }}.py"
+    dest: "roles/s3/files/{{ item }}.zip"
+    format: zip
+  with_items:
+  - get_data
+  - insert_data
+
 - name: Create S3 Bucket
   amazon.aws.s3_bucket:
     name: "{{ code_bucket_name }}"
+    region: "{{ region }}"
     state: present
 
-- name: Zip Code 
-  archive:
-    path: code/index.py
-    dest: roles/s3/files/python-sample.zip
-    format: zip
-
-- name: Copy Sample Code to S3 Bucket
+- name: Copy Archive to S3 Bucket
   amazon.aws.aws_s3:
     bucket: "{{ code_bucket_name }}"
-    object: python-sample.zip
-    src: roles/s3/files/python-sample.zip
+    object: "{{ item }}.zip"
+    src: "roles/s3/files/{{ item }}.zip"
     mode: put
+  with_items:
+  - get_data
+  - insert_data
+

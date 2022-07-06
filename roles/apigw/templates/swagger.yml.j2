@@ -1,0 +1,68 @@
+swagger: '2.0'
+info:
+  description: A Simple API to Interact with Lambda-DDB
+  title: Demo API - Lambda - DDB 
+  version: v1
+host: localhost
+
+schemes:
+  - https
+
+basePath: /
+paths:
+  /:
+    get:
+      summary: Get All details
+      responses:
+        '200':
+          description: Success response
+          schema:
+            $ref: "#/definitions/ObjectReturn"
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        credentials: arn:aws:iam::{{ account_number }}:role/service-role/python-sample-template-role-x79qi0ie
+        uri: "arn:aws:apigateway:{{ region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ region }}:{{ account_number }}:function:get_data/invocations"
+        httpMethod: "POST"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+    post:
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:{{ region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ region }}:{{ account_number }}:function:insert_data/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+  /{id}:
+    get:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+      x-amazon-apigateway-integration:
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::{{ account_number }}:role/service-role/python-sample-template-role-x79qi0ie"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:{{ region }}:lambda:path/2015-03-31/functions/arn:aws:lambda:{{ region }}:{{ account_number }}:function:get_data/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+
+definitions:
+  ObjectReturn:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"

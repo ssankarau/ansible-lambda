@@ -2,7 +2,8 @@
 - name : Deploy Serverless Components on AWS.
   hosts: local
   roles:
-  - ddb
+  - general
   - s3
   - lambda
   - apigw
+  - ddb

@@ -1,23 +1,21 @@
 # Create Lambda functions
-- name: Test Lambda
+- name: Create Lambda Functions
   community.aws.lambda:
-    name: 'HelloWorld'
+    name: '{{ item }}'
     state: present
     s3_bucket: "{{ code_bucket_name }}"
-    s3_key: "{{ package_name }}"
-    # zip_file: "roles/lambda/files/{{ code_zip }}"
+    s3_key: "{{ item }}.zip"
     runtime: 'python3.8'
-    role:  "{{ lambda_role_arn }}" #'arn:aws:iam::987654321012:role/lambda_basic_execution'
-    handler: "{{ handler }}" #'hello_python.my_handler'
+    role:  "{{ lambda_role_arn }}"
+    handler: "{{ item }}.lambda_handler"
     region: "{{ region }}"
-    # vpc_subnet_ids:
-    # - subnet-123abcde
-    # - subnet-edcba321
-    # vpc_security_group_ids:
-    # - sg-123abcde
-    # - sg-edcba321
     environment_variables:
       RDS_Endpoint: "{{ rds_endpoint }}"        
     tags:
-      Name: 'Lambda-Test'
+      Name: '{{ item }}'
+      managed_by: "Ansible"
+  with_items:
+  - get_data
+  - insert_data
+
 
