@@ -1,5 +1,6 @@
 - name: Setup AWS API Gateway setup on AWS and deploy API definition
   community.aws.aws_api_gateway:
+    region: "{{ region }}"
     swagger_file: roles/apigw/files/swagger.yml
     stage: dev
     cache_enabled: true

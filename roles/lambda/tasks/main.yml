@@ -9,6 +9,7 @@
     runtime: 'python3.8'
     role:  "{{ lambda_role_arn }}" #'arn:aws:iam::987654321012:role/lambda_basic_execution'
     handler: "{{ handler }}" #'hello_python.my_handler'
+    region: "{{ region }}"
     # vpc_subnet_ids:
     # - subnet-123abcde
     # - subnet-edcba321
