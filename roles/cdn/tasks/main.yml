@@ -1,0 +1,16 @@
+- name: create a distribution with an API GW Origin
+  community.aws.cloudfront_distribution:
+    state: present
+    caller_reference: my_demo_caller_reference
+    origins:
+    - id: 'demo-api-origin'
+      domain_name: "{{ apigw_domain_name }}"
+      origin_path: /dev
+  register: cdn_resource
+
+- name: CDN URL
+  debug:
+    var: cdn_resource.domain_name
+
+- name: COPY CDN URL 
+  shell: echo "{{ cdn_resource.domain_name }}" > cdn_url.txt

@@ -1,5 +1,5 @@
 ---
 code_zip: "python-sample.zip"
 handler: "index.lambda_handler"
-lambda_role_arn: "arn:aws:iam::{{ account_number }}:role/service-role/python-sample-template-role-x79qi0ie"
+lambda_role_arn: "{{ iam_role_ddb_lambda_arn }}"
 rds_endpoint: "some_rds_end_point"

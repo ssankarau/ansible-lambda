@@ -3,11 +3,9 @@
     state: present
     function_name: get_data
     region: "{{ region }}"
-    # alias: dev
     statement_id: get-data-lambda-api-invocation-1
     action: lambda:InvokeFunction
     principal: apigateway.amazonaws.com
-    # source_arn: "arn:aws:execute-api:us-east-1:{{ account_number }}:{{ api_gateway_resource.api_id }}/*/*/HelloWorld"
     source_arn: "arn:aws:execute-api:{{ region }}:{{ account_number }}:{{ api_gateway_resource.api_id }}/*/GET/*"
 
 - name: Lambda API GW Invocation for Post Data
@@ -15,9 +13,7 @@
     state: present
     function_name: insert_data
     region: "{{ region }}"
-    # alias: dev
     statement_id: post-data-lambda-api-invocation-1
     action: lambda:InvokeFunction
     principal: apigateway.amazonaws.com
-    # source_arn: "arn:aws:execute-api:us-east-1:{{ account_number }}:{{ api_gateway_resource.api_id }}/*/*/HelloWorld"
     source_arn: "arn:aws:execute-api:{{ region }}:{{ account_number }}:{{ api_gateway_resource.api_id }}/*/POST/"

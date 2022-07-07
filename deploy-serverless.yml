@@ -3,7 +3,9 @@
   hosts: local
   roles:
   - general
+  - iam
   - s3
   - lambda
   - apigw
   - ddb
+  - cdn

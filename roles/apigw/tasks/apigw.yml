@@ -14,3 +14,11 @@
     endpoint_type: EDGE
     state: present
   register: api_gateway_resource
+
+- name: Set API Gateway Domain Name
+  set_fact:
+    apigw_domain_name: "{{ api_gateway_resource.api_id }}.execute-api.{{ region }}.amazonaws.com"
+
+- name: Display API Gateway Domain Name 
+  debug:
+    var: apigw_domain_name

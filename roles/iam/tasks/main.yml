@@ -1,0 +1,21 @@
+- name: Create a role with Lambda Invocation and DDB Access
+  community.aws.iam_role:
+    name: Ansible-Lambda-Invocation-DDB-Full-Access
+    assume_role_policy_document: "{{ lookup('file','policy.json') }}"
+    description: Provides access to DDB Full and Lambda Invocation Access
+    tags:
+      env: dev
+      managed_by: "ansible"
+  register: iam_role_ddb_lambda
+
+- name: Assign a Lambda DDB policy to Role
+  community.aws.iam_policy:
+    iam_type: role
+    iam_name: "{{ iam_role_ddb_lambda.iam_role.role_name }}"
+    policy_name: Ansible-Lambda-DDB-Policy
+    state: present
+    policy_document: "roles/iam/files/permission.json"
+
+- name: Get the Role ARN  
+  set_fact:
+    iam_role_ddb_lambda_arn:  "{{ iam_role_ddb_lambda.iam_role.arn }}"
