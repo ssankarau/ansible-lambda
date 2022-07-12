@@ -3,32 +3,32 @@
     state: present
     caller_reference: my_demo_caller_reference
     origins:
-    - id: "demo-api-origin-{{ region }}"
+    - id: "demo-api-origin-{{ region }}-{{ ansible_date_time.iso8601_basic_short }}"
       domain_name: "{{ apigw_domain_name }}"
       origin_path: /dev
-    default_cache_behavior:
-      target_origin_id: "demo-api-origin-{{ region }}"
-      forwarded_values:
-        query_string: true
-        cookies:
-          forward: all
-        headers:
-         - '*'
-      viewer_protocol_policy: allow-all
-      smooth_streaming: true
-      compress: true
-      allowed_methods:
-        items:
-          - GET
-          - HEAD
-          - POST
-          - OPTIONS
-          - DELETE
-          - PUT
-          - PATCH
-        cached_methods:
-          - GET
-          - HEAD
+    # default_cache_behavior:
+    #   target_origin_id: "demo-api-origin-{{ region }}-{{ ansible_date_time.iso8601_basic_short }}"
+    #   forwarded_values:
+    #     query_string: true
+    #     cookies:
+    #       forward: all
+    #     headers:
+    #      - '*'
+    #   viewer_protocol_policy: allow-all
+    #   smooth_streaming: true
+    #   compress: true
+    #   allowed_methods:
+    #     items:
+    #       - GET
+    #       - HEAD
+    #       - POST
+    #       - OPTIONS
+    #       - DELETE
+    #       - PUT
+    #       - PATCH
+    #     cached_methods:
+    #       - GET
+    #       - HEAD
 
   register: cdn_resource
 
