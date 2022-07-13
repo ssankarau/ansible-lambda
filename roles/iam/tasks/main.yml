@@ -20,10 +20,6 @@
   set_fact:
     iam_role_ddb_lambda_arn:  "{{ iam_role_ddb_lambda.iam_role.arn }}"
 
-- name: Debug
-  debug:
-    var: iam_role_ddb_lambda_arn
-
-- name: Pause for 5 minutes to build app cache
+- name: Pause for 30 minutes for Enabling Role
   ansible.builtin.pause:
     seconds: 30
