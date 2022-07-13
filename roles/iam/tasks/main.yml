@@ -19,3 +19,8 @@
 - name: Get the Role ARN  
   set_fact:
     iam_role_ddb_lambda_arn:  "{{ iam_role_ddb_lambda.iam_role.arn }}"
+
+- name: Debug
+  debug:
+    var: iam_role_ddb_lambda_arn
+    

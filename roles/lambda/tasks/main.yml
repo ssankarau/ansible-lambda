@@ -6,7 +6,7 @@
     s3_bucket: "{{ code_bucket_name }}"
     s3_key: "{{ item }}.zip"
     runtime: 'python3.8'
-    role:  "{{ iam_role_ddb_lambda_arn }}"
+    role:  "{{ iam_role_ddb_lambda.iam_role.arn }}"
     handler: "{{ item }}.lambda_handler"
     region: "{{ region }}"
     environment_variables:
