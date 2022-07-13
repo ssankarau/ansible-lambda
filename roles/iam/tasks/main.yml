@@ -23,4 +23,7 @@
 - name: Debug
   debug:
     var: iam_role_ddb_lambda_arn
-    
+
+- name: Pause for 5 minutes to build app cache
+  ansible.builtin.pause:
+    seconds: 30
